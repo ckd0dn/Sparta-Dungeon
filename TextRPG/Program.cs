@@ -1,13 +1,27 @@
 ﻿using System;
+using System.Numerics;
 
 namespace TextRPG
 {
     internal class Program
     {
-        static Character character;
-        static Store store;
 
         static void Main(string[] args)
+        {
+            SpartaDungean game = new SpartaDungean();
+            game.PlayGame();
+
+        }
+
+
+    }
+
+    public class SpartaDungean
+    {
+        private Character character;
+        private Store store;
+
+        public void PlayGame()
         {
             character = new Character();
             store = new Store();
@@ -15,10 +29,9 @@ namespace TextRPG
             Intro();
         }
 
-        public static void Intro()
+        public void Intro()
         {
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("###########################################################################");     
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
 
@@ -59,10 +72,9 @@ namespace TextRPG
             }
         }
 
-        public static void ViewStatus()
+        public void ViewStatus()
         {
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("###########################################################################");
             Console.WriteLine("상태보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine();
@@ -118,10 +130,9 @@ namespace TextRPG
 
         }
 
-        public static void ViewInventory()
+        public void ViewInventory()
         {
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("###########################################################################");
             Console.WriteLine("인벤토리");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine();
@@ -176,10 +187,9 @@ namespace TextRPG
 
         }
 
-        public static void ManageEquipment()
+        public void ManageEquipment()
         {
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("###########################################################################");
             Console.WriteLine("인벤토리 - 장착관리");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine();
@@ -254,10 +264,9 @@ namespace TextRPG
 
         }
 
-        public static void ViewStore()
+        public void ViewStore()
         {
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("###########################################################################");
             Console.WriteLine("상점");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine();
@@ -307,10 +316,9 @@ namespace TextRPG
         }
 
 
-        public static void PurchaseItem()
+        public void PurchaseItem()
         {
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("###########################################################################");
             Console.WriteLine("상점 - 아이템 구매");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine();
@@ -393,10 +401,7 @@ namespace TextRPG
 
         }
 
-
     }
-
-
 
 
     public class Character
@@ -497,13 +502,6 @@ namespace TextRPG
         public bool IsSold { get; set; } = false;
         public Equipment equipment { get; set; }
 
-    }
-
-    public enum Action
-    {
-        Status = 1,
-        Inventory,
-        Store
     }
 
     public enum EquipmentType

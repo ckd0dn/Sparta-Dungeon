@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chang\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj": {}
+    "C:\\SpartaCodingProjects\\Sparta-Dungeon\\TextRPG\\TextRPG.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chang\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj": {
+    "C:\\SpartaCodingProjects\\Sparta-Dungeon\\TextRPG\\TextRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chang\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj",
+        "projectUniqueName": "C:\\SpartaCodingProjects\\Sparta-Dungeon\\TextRPG\\TextRPG.csproj",
         "projectName": "TextRPG",
-        "projectPath": "C:\\Users\\chang\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj",
+        "projectPath": "C:\\SpartaCodingProjects\\Sparta-Dungeon\\TextRPG\\TextRPG.csproj",
         "packagesPath": "C:\\Users\\chang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chang\\source\\repos\\TextRPG\\TextRPG\\obj\\",
+        "outputPath": "C:\\SpartaCodingProjects\\Sparta-Dungeon\\TextRPG\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chang\\AppData\\Roaming\\NuGet\\NuGet.Config",

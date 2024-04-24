@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TextRPG
-build_property.ProjectDir = C:\Users\chang\source\repos\TextRPG\TextRPG\
+build_property.ProjectDir = C:\SpartaCodingProjects\Sparta-Dungeon\TextRPG\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
