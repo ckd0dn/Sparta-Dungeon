@@ -11,8 +11,8 @@ public class Character
     public int damage;
     public int defense;
     public int health;
-    public int gold;
-    public List<Equipment> inventory;
+    public float gold;
+    public List<Item> inventory;
 
 
 
@@ -25,6 +25,6 @@ public class Character
         defense = 5;
         health = 100;
         gold = 5000;
-        inventory = new List<Equipment>();
+        inventory = new List<Item>();
     }
 }

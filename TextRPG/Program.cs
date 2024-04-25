@@ -37,7 +37,7 @@ namespace TextRPG
 
         public void Intro()
         {
-            Console.WriteLine("###########################################################################");     
+            Console.WriteLine("###########################################################################");
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
 
@@ -90,17 +90,17 @@ namespace TextRPG
             int weaponDamage = 0;
             int armorDefense = 0;
 
-            foreach (Equipment equipment in character.inventory)
+            foreach (Item item in character.inventory)
             {
-                if (equipment.isEquip)
+                if (item.isEquip)
                 {
-                    if (equipment.type == EquipmentType.Weapon)
+                    if (item.type == EquipmentType.Weapon)
                     {
-                        weaponDamage += equipment.stat;
+                        weaponDamage += item.stat;
                     }
-                    else if (equipment.type == EquipmentType.Armor)
+                    else if (item.type == EquipmentType.Armor)
                     {
-                        armorDefense += equipment.stat;
+                        armorDefense += item.stat;
                     }
                 }
             }
@@ -145,18 +145,18 @@ namespace TextRPG
             Console.WriteLine("[아이템 목록]");
             for (int i = 0; i < character.inventory.Count; i++)
             {
-                Equipment equipment = character.inventory[i];
+                Item item = character.inventory[i];
 
-                string isEquip = equipment.isEquip == true ? "[E]" : "";
+                string isEquip = item.isEquip == true ? "[E]" : "";
 
-                string equipmentType = equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string equipmentType = item.type == EquipmentType.Weapon ? "공격력" : "방어력";
 
-                if (equipment.isEquip)
+                if (item.isEquip)
                 {
                     isEquip = "[E]";
                 }
 
-                Console.WriteLine($"- {isEquip}{equipment.name} | {equipmentType} +{equipment.stat} | {equipment.desc}");
+                Console.WriteLine($"- {isEquip}{item.name} | {equipmentType} +{item.stat} | {item.desc}");
 
             }
 
@@ -183,7 +183,7 @@ namespace TextRPG
                     Intro();
                     break;
                 case 1:
-                    ManageEquipment();
+                    Manageitem();
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
@@ -193,7 +193,7 @@ namespace TextRPG
 
         }
 
-        public void ManageEquipment()
+        public void Manageitem()
         {
             Console.WriteLine("###########################################################################");
             Console.WriteLine("인벤토리 - 장착관리");
@@ -202,18 +202,18 @@ namespace TextRPG
             Console.WriteLine("[아이템 목록]");
             for (int i = 0; i < character.inventory.Count; i++)
             {
-                Equipment equipment = character.inventory[i];
+                Item item = character.inventory[i];
 
-                string isEquip = equipment.isEquip == true ? "[E]" : "";
+                string isEquip = item.isEquip == true ? "[E]" : "";
 
-                string equipmentType = equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string equipmentType = item.type == EquipmentType.Weapon ? "공격력" : "방어력";
 
-                if (equipment.isEquip)
+                if (item.isEquip)
                 {
                     isEquip = "[E]";
                 }
 
-                Console.WriteLine($"- {i + 1} {isEquip} {equipment.name} | {equipmentType} +{equipment.stat} | {equipment.desc}");
+                Console.WriteLine($"- {i + 1} {isEquip} {item.name} | {equipmentType} +{item.stat} | {item.desc}");
 
             }
 
@@ -230,7 +230,7 @@ namespace TextRPG
             {
                 // 입력 값이 정수로 변환되지 않았을 때 처리할 코드
                 Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
-                ManageEquipment();
+                Manageitem();
             }
 
 
@@ -239,20 +239,20 @@ namespace TextRPG
             if (action > 0 && action < character.inventory.Count + 1)
             {
                 // 장착, 장착해제
-                Equipment equipment = character.inventory[action - 1];
+                Item item = character.inventory[action - 1];
 
-                equipment.isEquip = !equipment.isEquip;
-                if (equipment.isEquip)
+                item.isEquip = !item.isEquip;
+                if (item.isEquip)
                 {
-                    Console.Write($"{equipment.name}이 장착되었습니다.");
+                    Console.Write($"{item.name}이 장착되었습니다.");
                 }
                 else
                 {
-                    Console.Write($"{equipment.name}이 장착해제 되었습니다.");
+                    Console.Write($"{item.name}이 장착해제 되었습니다.");
                 }
                 Console.WriteLine();
                 Console.WriteLine();
-                ManageEquipment();
+                Manageitem();
             }
             else
             {
@@ -263,7 +263,7 @@ namespace TextRPG
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
-                        ManageEquipment();
+                        Manageitem();
                         break;
                 }
             }
@@ -282,13 +282,14 @@ namespace TextRPG
             Console.WriteLine("[아이템 목록]");
             foreach (var item in store.Items)
             {
-                string equipmentType = item.equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string equipmentType = item.type == EquipmentType.Weapon ? "공격력" : "방어력";
                 string price = item.isSold ? "구매완료" : item.price.ToString() + " G";
 
-                Console.WriteLine($"- {item.equipment.name} | {equipmentType} {item.equipment.stat} | {item.equipment.desc} | {price}");
+                Console.WriteLine($"- {item.name} | {equipmentType} {item.stat} | {item.desc} | {price}");
             }
             Console.WriteLine();
             Console.WriteLine("1. 아이템 구매");
+            Console.WriteLine("2. 아이템 판매");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요");
@@ -311,6 +312,9 @@ namespace TextRPG
                     break;
                 case 1:
                     PurchaseItem();
+                    break;
+                case 2:
+                    ViewSellItem();
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
@@ -336,10 +340,10 @@ namespace TextRPG
 
             foreach (var item in store.Items)
             {
-                string equipmentType = item.equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string equipmentType = item.type == EquipmentType.Weapon ? "공격력" : "방어력";
                 string price = item.isSold ? "구매완료" : item.price.ToString() + " G";
 
-                Console.WriteLine($"- {itemIndex} {item.equipment.name} | {equipmentType} {item.equipment.stat} | {item.equipment.desc} | {price}");
+                Console.WriteLine($"- {itemIndex} {item.name} | {equipmentType} {item.stat} | {item.desc} | {price}");
 
                 itemIndex++;
             }
@@ -377,7 +381,7 @@ namespace TextRPG
                 {
                     item.isSold = true;
                     character.gold -= item.price;
-                    character.inventory.Add(item.equipment);
+                    character.inventory.Add(item);
                     Console.WriteLine("구매를 완료했습니다.");
                     PurchaseItem();
                 }
@@ -393,7 +397,7 @@ namespace TextRPG
                 switch (action)
                 {
                     case 0:
-                        Intro();
+                        ViewStore();
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
@@ -403,10 +407,71 @@ namespace TextRPG
             }
 
 
+        }
 
+        public void ViewSellItem()
+        {
+            Console.WriteLine("###########################################################################");
+            Console.WriteLine("상점 - 아이템 판매");
+            Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
+            Console.WriteLine();
+            Console.WriteLine("[보유 골드]");
+            Console.WriteLine($"{character.gold} G");
+            Console.WriteLine();
+            Console.WriteLine("[아이템 목록]");
+
+            int itemIndex = 1;
+
+            foreach (var item in character.inventory)
+            {
+                string equipmentType = item.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string price = item.price * 0.85f + " G";
+
+                Console.WriteLine($"- {itemIndex} {item.name} | {equipmentType} {item.stat} | {item.desc} | {price}");
+
+                itemIndex++;
+            }
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요");
+
+            int action;
+
+            bool isValidInput = int.TryParse(Console.ReadLine(), out action);
+
+            if (!isValidInput)
+            {
+                Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
+                ViewSellItem();
+            }
+
+            Console.WriteLine();
+
+            // 번호입력시 판매
+
+            if (action > 0 && action < character.inventory.Count + 1)
+            {
+                Item item = character.inventory[action - 1];
+                item.SellItem(character);
+                Console.WriteLine($"{item.name}이 판매되었습니다.");
+                ViewSellItem();
+            }
+            else
+            {
+                switch (action)
+                {
+                    case 0:
+                        ViewStore();
+                        break;
+                    default:
+                        Console.WriteLine("잘못된 입력입니다.");
+                        ViewSellItem();
+                        break;
+                }
+            }
 
         }
 
     }
-
 }
