@@ -2,11 +2,11 @@
 
 public class Store
 {
-    public List<Item> Items { get; set; }
+    public Item[] Items;
 
     public Store()
     {
-        Items = new List<Item>();
+        Items = new Item[6];
 
         Item item1 = new Item("수련자 갑옷", 5, EquipmentType.Armor, "수련에 도움을 주는 갑옷입니다.", 1000);
 
@@ -19,13 +19,15 @@ public class Store
         Item item5 = new Item("청동 도끼", 5, EquipmentType.Weapon, "어디선가 사용됐던거 같은 도끼입니다.", 1500);
 
         Item item6 = new Item("스파르타의 창", 7, EquipmentType.Weapon, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 2200);
+                
 
-        Items.Add(item1);
-        Items.Add(item2);
-        Items.Add(item3);
-        Items.Add(item4);
-        Items.Add(item5);
-        Items.Add(item6);
+        Items[0] = item1;
+        Items[1] = item2;
+        Items[2] = item3;
+        Items[3] = item4;
+        Items[4] = item5;
+        Items[5] = item6;
+   
     }
 
 }

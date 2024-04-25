@@ -22,9 +22,9 @@ public class Item
 
     public void SellItem(Character character)
     {
-        // 아이템을 인벤토리에서 빼야함 
+        // 아이템을 인벤토리에서 제거
         character.inventory.Remove(this);
-        // 골드를 85퍼 가격으로 올려야함
+        // 캐릭터의 골드를 85퍼 가격으로 올림
         character.gold += price * 0.85f;
     }
 }

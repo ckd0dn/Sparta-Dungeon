@@ -366,7 +366,7 @@ namespace TextRPG
             Console.WriteLine();
 
             // 번호입력시 구매
-            if (action > 0 && action < store.Items.Count + 1)
+            if (action > 0 && action < store.Items.Length + 1)
             {
                 Item item = store.Items[action - 1];
 
