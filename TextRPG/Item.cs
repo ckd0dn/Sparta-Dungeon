@@ -2,8 +2,8 @@
 
 public class Item
 {
-    public int Price { get; set; }
-    public bool IsSold { get; set; } = false;
-    public Equipment equipment { get; set; }
+    public int price;
+    public bool isSold = false;
+    public Equipment equipment;
 
 }

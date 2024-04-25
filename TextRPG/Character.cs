@@ -5,26 +5,26 @@
 /// </summary>
 public class Character
 {
-    public string Job { get; set; }
-    public string Name { get; set; }
-    public int Level { get; set; }
-    public int Damage { get; set; }
-    public int Defense { get; set; }
-    public int Health { get; set; }
-    public int Gold { get; set; }
-    public List<Equipment> Inventory { get; set; }
+    public string job;
+    public string name;
+    public int level;
+    public int damage;
+    public int defense;
+    public int health;
+    public int gold;
+    public List<Equipment> inventory;
 
 
 
     public Character()
     {
-        Job = "전사";
-        Name = "Chad";
-        Level = 1;
-        Damage = 10;
-        Defense = 5;
-        Health = 100;
-        Gold = 5000;
-        Inventory = new List<Equipment>();
+        job = "전사";
+        name = "Chad";
+        level = 1;
+        damage = 10;
+        defense = 5;
+        health = 100;
+        gold = 5000;
+        inventory = new List<Equipment>();
     }
 }

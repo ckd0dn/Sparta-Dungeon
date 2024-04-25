@@ -2,23 +2,18 @@
 
 public class Equipment
 {
-    public string Name { get; set; }
-    public int Stat { get; set; }
-    public EquipmentType Type { get; set; }
-    public bool IsEquip { get; set; } = false;
-    public string Desc { get; set; }
-
-    public Equipment()
-    {
-
-    }
+    public string name;
+    public int stat;
+    public EquipmentType type;
+    public bool isEquip = false;
+    public string desc;
 
     public Equipment(string name, int stat, EquipmentType type, string desc)
     {
-        Name = name;
-        Stat = stat;
-        Type = type;
-        Desc = desc;
+        this.name = name;
+        this.stat = stat;
+        this.type = type;
+        this.desc = desc;
     }
 
 }

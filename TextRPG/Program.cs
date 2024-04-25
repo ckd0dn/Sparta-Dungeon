@@ -84,30 +84,30 @@ namespace TextRPG
             Console.WriteLine("상태보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
             Console.WriteLine();
-            Console.WriteLine($"Lv. {character.Level}");
-            Console.WriteLine($"{character.Name} ( {character.Job} )");
+            Console.WriteLine($"Lv. {character.level}");
+            Console.WriteLine($"{character.name} ( {character.job} )");
 
             int weaponDamage = 0;
             int armorDefense = 0;
 
-            foreach (Equipment equipment in character.Inventory)
+            foreach (Equipment equipment in character.inventory)
             {
-                if (equipment.IsEquip)
+                if (equipment.isEquip)
                 {
-                    if (equipment.Type == EquipmentType.Weapon)
+                    if (equipment.type == EquipmentType.Weapon)
                     {
-                        weaponDamage += equipment.Stat;
+                        weaponDamage += equipment.stat;
                     }
-                    else if (equipment.Type == EquipmentType.Armor)
+                    else if (equipment.type == EquipmentType.Armor)
                     {
-                        armorDefense += equipment.Stat;
+                        armorDefense += equipment.stat;
                     }
                 }
             }
-            Console.WriteLine($"공격력 : {character.Damage}" + (weaponDamage != 0 ? $" (+{weaponDamage})" : ""));
-            Console.WriteLine($"방어력 : {character.Defense}" + (armorDefense != 0 ? $" (+{armorDefense})" : ""));
-            Console.WriteLine($"체력 : {character.Health}");
-            Console.WriteLine($"Gold : {character.Gold} G");
+            Console.WriteLine($"공격력 : {character.damage}" + (weaponDamage != 0 ? $" (+{weaponDamage})" : ""));
+            Console.WriteLine($"방어력 : {character.defense}" + (armorDefense != 0 ? $" (+{armorDefense})" : ""));
+            Console.WriteLine($"체력 : {character.health}");
+            Console.WriteLine($"Gold : {character.gold} G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
@@ -143,20 +143,20 @@ namespace TextRPG
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
-            for (int i = 0; i < character.Inventory.Count; i++)
+            for (int i = 0; i < character.inventory.Count; i++)
             {
-                Equipment equipment = character.Inventory[i];
+                Equipment equipment = character.inventory[i];
 
-                string isEquip = equipment.IsEquip == true ? "[E]" : "";
+                string isEquip = equipment.isEquip == true ? "[E]" : "";
 
-                string equipmentType = equipment.Type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string equipmentType = equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
 
-                if (equipment.IsEquip)
+                if (equipment.isEquip)
                 {
                     isEquip = "[E]";
                 }
 
-                Console.WriteLine($"- {isEquip}{equipment.Name} | {equipmentType} +{equipment.Stat} | {equipment.Desc}");
+                Console.WriteLine($"- {isEquip}{equipment.name} | {equipmentType} +{equipment.stat} | {equipment.desc}");
 
             }
 
@@ -200,20 +200,20 @@ namespace TextRPG
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
-            for (int i = 0; i < character.Inventory.Count; i++)
+            for (int i = 0; i < character.inventory.Count; i++)
             {
-                Equipment equipment = character.Inventory[i];
+                Equipment equipment = character.inventory[i];
 
-                string isEquip = equipment.IsEquip == true ? "[E]" : "";
+                string isEquip = equipment.isEquip == true ? "[E]" : "";
 
-                string equipmentType = equipment.Type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string equipmentType = equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
 
-                if (equipment.IsEquip)
+                if (equipment.isEquip)
                 {
                     isEquip = "[E]";
                 }
 
-                Console.WriteLine($"- {i + 1} {isEquip} {equipment.Name} | {equipmentType} +{equipment.Stat} | {equipment.Desc}");
+                Console.WriteLine($"- {i + 1} {isEquip} {equipment.name} | {equipmentType} +{equipment.stat} | {equipment.desc}");
 
             }
 
@@ -236,19 +236,19 @@ namespace TextRPG
 
             Console.WriteLine();
 
-            if (action > 0 && action < character.Inventory.Count + 1)
+            if (action > 0 && action < character.inventory.Count + 1)
             {
                 // 장착, 장착해제
-                Equipment equipment = character.Inventory[action - 1];
+                Equipment equipment = character.inventory[action - 1];
 
-                equipment.IsEquip = !equipment.IsEquip;
-                if (equipment.IsEquip)
+                equipment.isEquip = !equipment.isEquip;
+                if (equipment.isEquip)
                 {
-                    Console.Write($"{equipment.Name}이 장착되었습니다.");
+                    Console.Write($"{equipment.name}이 장착되었습니다.");
                 }
                 else
                 {
-                    Console.Write($"{equipment.Name}이 장착해제 되었습니다.");
+                    Console.Write($"{equipment.name}이 장착해제 되었습니다.");
                 }
                 Console.WriteLine();
                 Console.WriteLine();
@@ -277,15 +277,15 @@ namespace TextRPG
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine();
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{character.Gold} G");
+            Console.WriteLine($"{character.gold} G");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
             foreach (var item in store.Items)
             {
-                string equipmentType = item.equipment.Type == EquipmentType.Weapon ? "공격력" : "방어력";
-                string price = item.IsSold ? "구매완료" : item.Price.ToString() + " G";
+                string equipmentType = item.equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string price = item.isSold ? "구매완료" : item.price.ToString() + " G";
 
-                Console.WriteLine($"- {item.equipment.Name} | {equipmentType} {item.equipment.Stat} | {item.equipment.Desc} | {price}");
+                Console.WriteLine($"- {item.equipment.name} | {equipmentType} {item.equipment.stat} | {item.equipment.desc} | {price}");
             }
             Console.WriteLine();
             Console.WriteLine("1. 아이템 구매");
@@ -329,17 +329,17 @@ namespace TextRPG
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
             Console.WriteLine();
             Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{character.Gold} G");
+            Console.WriteLine($"{character.gold} G");
             Console.WriteLine();
             Console.WriteLine("[아이템 목록]");
             int itemIndex = 1;
 
             foreach (var item in store.Items)
             {
-                string equipmentType = item.equipment.Type == EquipmentType.Weapon ? "공격력" : "방어력";
-                string price = item.IsSold ? "구매완료" : item.Price.ToString() + " G";
+                string equipmentType = item.equipment.type == EquipmentType.Weapon ? "공격력" : "방어력";
+                string price = item.isSold ? "구매완료" : item.price.ToString() + " G";
 
-                Console.WriteLine($"- {itemIndex} {item.equipment.Name} | {equipmentType} {item.equipment.Stat} | {item.equipment.Desc} | {price}");
+                Console.WriteLine($"- {itemIndex} {item.equipment.name} | {equipmentType} {item.equipment.stat} | {item.equipment.desc} | {price}");
 
                 itemIndex++;
             }
@@ -367,17 +367,17 @@ namespace TextRPG
                 Item item = store.Items[action - 1];
 
                 // 이미 구매한 아이템
-                if (item.IsSold)
+                if (item.isSold)
                 {
                     Console.WriteLine("이미 구매한 아이템입니다.");
                     PurchaseItem();
                 }
                 // 보유한 돈이 아이템 가격보다 많다면 구매가능
-                else if (character.Gold >= item.Price)
+                else if (character.gold >= item.price)
                 {
-                    item.IsSold = true;
-                    character.Gold -= item.Price;
-                    character.Inventory.Add(item.equipment);
+                    item.isSold = true;
+                    character.gold -= item.price;
+                    character.inventory.Add(item.equipment);
                     Console.WriteLine("구매를 완료했습니다.");
                     PurchaseItem();
                 }
