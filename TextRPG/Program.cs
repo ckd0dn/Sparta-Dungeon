@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-public enum EquipmentType
-{
-    Weapon,
-    Armor
 
-}
 namespace TextRPG
 {
     internal class Program
@@ -44,6 +39,7 @@ namespace TextRPG
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 상점");
+            Console.WriteLine("4. 던전입장");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
@@ -61,15 +57,18 @@ namespace TextRPG
             switch (action)
             {
                 case 1:
-                    ViewStatus();
+                    ShowStatus();
                     break;
 
                 case 2:
-                    ViewInventory();
+                    ShowInventory();
                     break;
 
                 case 3:
-                    ViewStore();
+                    ShowStore();
+                    break;
+                case 4:
+                    EnterDungeon();
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
@@ -78,7 +77,7 @@ namespace TextRPG
             }
         }
 
-        public void ViewStatus()
+        public void ShowStatus()
         {
             Console.WriteLine("###########################################################################");
             Console.WriteLine("상태보기");
@@ -121,7 +120,7 @@ namespace TextRPG
             {
                 // 입력 값이 정수로 변환되지 않았을 때 처리할 코드
                 Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
-                ViewStatus();
+                ShowStatus();
             }
 
             if (action == 0)
@@ -131,12 +130,12 @@ namespace TextRPG
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
-                ViewStatus();
+                ShowStatus();
             }
 
         }
 
-        public void ViewInventory()
+        public void ShowInventory()
         {
             Console.WriteLine("###########################################################################");
             Console.WriteLine("인벤토리");
@@ -174,7 +173,7 @@ namespace TextRPG
             {
                 // 입력 값이 정수로 변환되지 않았을 때 처리할 코드
                 Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
-                ViewInventory();
+                ShowInventory();
             }
 
             switch (action)
@@ -187,7 +186,7 @@ namespace TextRPG
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
-                    ViewInventory();
+                    ShowInventory();
                     break;
             }
 
@@ -259,7 +258,7 @@ namespace TextRPG
                 switch (action)
                 {
                     case 0:
-                        ViewInventory();
+                        ShowInventory();
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
@@ -270,7 +269,7 @@ namespace TextRPG
 
         }
 
-        public void ViewStore()
+        public void ShowStore()
         {
             Console.WriteLine("###########################################################################");
             Console.WriteLine("상점");
@@ -302,7 +301,7 @@ namespace TextRPG
             {
                 // 입력 값이 정수로 변환되지 않았을 때 처리할 코드
                 Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
-                ViewStore();
+                ShowStore();
             }
 
             switch (action)
@@ -314,11 +313,11 @@ namespace TextRPG
                     PurchaseItem();
                     break;
                 case 2:
-                    ViewSellItem();
+                    ShowSellItem();
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
-                    ViewStore();
+                    ShowStore();
                     break;
             }
 
@@ -397,7 +396,7 @@ namespace TextRPG
                 switch (action)
                 {
                     case 0:
-                        ViewStore();
+                        ShowStore();
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
@@ -409,7 +408,7 @@ namespace TextRPG
 
         }
 
-        public void ViewSellItem()
+        public void ShowSellItem()
         {
             Console.WriteLine("###########################################################################");
             Console.WriteLine("상점 - 아이템 판매");
@@ -443,7 +442,7 @@ namespace TextRPG
             if (!isValidInput)
             {
                 Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
-                ViewSellItem();
+                ShowSellItem();
             }
 
             Console.WriteLine();
@@ -455,23 +454,77 @@ namespace TextRPG
                 Item item = character.inventory[action - 1];
                 item.SellItem(character);
                 Console.WriteLine($"{item.name}이 판매되었습니다.");
-                ViewSellItem();
+                ShowSellItem();
             }
             else
             {
                 switch (action)
                 {
                     case 0:
-                        ViewStore();
+                        ShowStore();
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
-                        ViewSellItem();
+                        ShowSellItem();
                         break;
                 }
             }
 
         }
 
+        public void EnterDungeon()
+        {
+            Dungeon dungeon = new Dungeon(character, this);
+
+            Console.WriteLine("###########################################################################");
+            Console.WriteLine("던전입장");
+            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+            Console.WriteLine();
+            Console.WriteLine("1. 쉬운 던전     | 방어력 5 이상 권장");
+            Console.WriteLine("2. 일반 던전     | 방어력 11 이상 권장");
+            Console.WriteLine("3. 어려운 던전   | 방어력 17 이상 권장");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요");
+
+            int action;
+
+            bool isValidInput = int.TryParse(Console.ReadLine(), out action);
+
+            if (!isValidInput)
+            {
+                Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
+                EnterDungeon();
+            }
+
+            Console.WriteLine();
+            switch (action)
+            {
+                case 1:
+                    // 쉬운 던전
+                    dungeon.EasyDungeon();
+                    break;
+                case 2:
+                    // 일반 던전
+                    dungeon.NomalDungeon();
+
+                    break;
+                case 3:
+                    // 어려운 던전
+                    dungeon.HardDungeon();
+                    break;
+                case 0:
+                    Intro();
+                    break;
+                default:
+                    Console.WriteLine("잘못된 입력입니다.");
+                    EnterDungeon();
+                    break;
+            }
+
+        }
+
     }
+
+ 
 }

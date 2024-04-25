@@ -1,6 +1,4 @@
-﻿using System;
-
-/// <summary>
+﻿/// <summary>
 /// Summary description for Class1
 /// </summary>
 public class Character
@@ -27,4 +25,40 @@ public class Character
         gold = 5000;
         inventory = new List<Item>();
     }
+
+    public int TotalDamage()
+    {
+        int itemStatTotal = 0;
+
+        foreach (Item item in inventory)
+        {
+            if (item.type == EquipmentType.Weapon)
+            {
+                itemStatTotal += item.stat;
+            }
+        }
+
+        int totalDamage = damage + itemStatTotal;
+
+        return totalDamage;
+    }
+
+
+    public int TotalDefense()
+    {
+        int itemStatTotal = 0;
+
+        foreach (Item item in inventory)
+        {
+            if (item.type == EquipmentType.Armor)
+            {
+                itemStatTotal += item.stat;
+            }
+        }
+
+        int totalDefense = damage + itemStatTotal;
+
+        return totalDefense;
+    }
+
 }
