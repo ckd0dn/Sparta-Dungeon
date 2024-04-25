@@ -8,11 +8,19 @@ public class Character
     public int level;
     public int damage;
     public int defense;
-    public int health;
+    private int _health;
     public float gold;
     public List<Item> inventory;
 
-
+    public int health
+    {
+        get { return _health;}
+        set
+        {
+            // 입력된 값이 0보다 작으면 0으로 설정
+            _health = (value < 0) ? 0 : value;
+        }
+    }
 
     public Character()
     {

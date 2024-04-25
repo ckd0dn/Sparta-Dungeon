@@ -57,10 +57,10 @@ public class Dungeon
             {
                 // 던전 실패
                 Console.WriteLine("###########################################################################");
-                Console.Write("던전 실패하였습니다.");
-                Console.Write("");
-                Console.Write("[탐험 결과]");
-                Console.Write($"체력 {character.health} -> {character.health / 2}");
+                Console.WriteLine("던전 실패하였습니다.");
+                Console.WriteLine();
+                Console.WriteLine("[탐험 결과]");
+                Console.WriteLine($"체력 {character.health} -> {character.health / 2}");
 
                 character.health /= 2;
             }
@@ -131,12 +131,12 @@ public class Dungeon
         float reward = defaultReward + defaultReward * new Random().Next(damage, damage * 2) * 0.01f;
         // 던전 성공
         Console.WriteLine("###########################################################################");
-        Console.Write("축하합니다!!");
-        Console.Write($"{dungeonName}을 클리어 하였습니다.");
-        Console.Write("");
-        Console.Write("[탐험 결과]");
-        Console.Write($"체력 {character.health} -> {character.health - healthDecrease}");
-        Console.Write($"체력 {character.gold} G -> {character.gold + reward} G");
+        Console.WriteLine("축하합니다!!");
+        Console.WriteLine($"{dungeonName}을 클리어 하였습니다.");
+        Console.WriteLine("");
+        Console.WriteLine("[탐험 결과]");
+        Console.WriteLine($"체력 {character.health} -> {character.health - healthDecrease}");
+        Console.WriteLine($"체력 {character.gold} G -> {character.gold + reward} G");
 
         character.gold += reward;
         character.health -= healthDecrease;
