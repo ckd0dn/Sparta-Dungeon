@@ -31,6 +31,7 @@ public class Dungeon
 
     public void CheckDungeon(int recommendDefense, DungeonType dungeonType)
     {
+        Console.Clear();
 
         int defense = character.TotalDamage();
         int damage = character.TotalDefense();
@@ -39,7 +40,8 @@ public class Dungeon
         {
             Console.WriteLine("###########################################################################");
             Console.WriteLine("체력이 부족해 던전입장이 불가합니다.");
-            Console.WriteLine("");
+            Thread.Sleep(1000);
+
             game.EnterDungeon();
         }
 
@@ -79,21 +81,8 @@ public class Dungeon
 
         Console.WriteLine();
         Console.WriteLine("0. 나가기");
-        Console.WriteLine();
-        Console.WriteLine("원하시는 행동을 입력해주세요");
 
-        int action;
-
-        bool isValidInput = int.TryParse(Console.ReadLine(), out action);
-
-        if (!isValidInput)
-        {
-            Console.WriteLine("잘못된 입력입니다. 정수를 입력하세요.");
-            game.EnterDungeon();
-        }
-
-        Console.WriteLine();
-        switch (action)
+        switch (ConsoleUtility.PromptMenuChoice(0, 0))
         {
             case 0:
                 game.EnterDungeon();
@@ -109,6 +98,8 @@ public class Dungeon
 
     public void ClearDungeon(DungeonType dungeonType, float defaultReward, int damage, int healthDecrease)
     {
+        Console.Clear();
+
         string dungeonName = "";
         // 던전별 클리어 보상
         if (dungeonType == DungeonType.Easy)
@@ -129,14 +120,15 @@ public class Dungeon
         }
 
         float reward = defaultReward + defaultReward * new Random().Next(damage, damage * 2) * 0.01f;
+        int resultHealth = (character.health - healthDecrease) > 0 ? character.health - healthDecrease : 0;
         // 던전 성공
         Console.WriteLine("###########################################################################");
         Console.WriteLine("축하합니다!!");
         Console.WriteLine($"{dungeonName}을 클리어 하였습니다.");
         Console.WriteLine("");
         Console.WriteLine("[탐험 결과]");
-        Console.WriteLine($"체력 {character.health} -> {character.health - healthDecrease}");
-        Console.WriteLine($"체력 {character.gold} G -> {character.gold + reward} G");
+        Console.WriteLine($"체력 {character.health} -> {resultHealth}");
+        Console.WriteLine($"Gold {character.gold} G -> {character.gold + reward} G");
 
         character.gold += reward;
         character.health -= healthDecrease;
